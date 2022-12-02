@@ -164,6 +164,17 @@ const Home = () => {
 					</div>
 				</div>
 			)}
+			<div className='container'>
+				<div className='callout'>
+					<h2>Unrelated Chrome Extension</h2>
+					<p>
+						If you're bored, I also made a{' '}
+						<a href='https://github.com/ngnathan/gpt3-writer-extension-starter'>Chrome Extension</a> that analyzes YouTube
+						comments and summarizes the positive / negative sentiments of a video. Download this zip and deploy to your Chrome
+						browser as an unpacked extension.
+					</p>
+				</div>
+			</div>
 			<div className='badge-container grow'>
 				<a href='https://buildspace.so/builds/ai-writer' target='_blank' rel='noreferrer'>
 					<div className='badge'>
