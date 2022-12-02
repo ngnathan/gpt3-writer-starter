@@ -59,6 +59,7 @@ body {
 }
 
 .header-subtitle h2 {
+	text-align: left;
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 400;
@@ -66,19 +67,56 @@ body {
 	color: rgba(255, 255, 255, 0.75);
 }
 
+.header-subtitle p {
+	color: white;
+}
+
+.callout {
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px 0px;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+}
+
+.callout p {
+	padding-left: 20px;
+}
+
+a {
+	color: #fff;
+}
+
+a:visited {
+	color: purple;
+}
+
+.error {
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: red;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+}
+
 .prompt-container {
 	place-content: flex-end center;
-	align-items: center;
+	align-items: flex-start;
 	display: flex;
 	flex: 0 0 auto;
 	flex-flow: column nowrap;
 	gap: 16px;
 	height: min-content;
 	padding: 0px;
-	width: min-content;
+	width: 100%;
 }
 
-.prompt-title {
+.prompt-input {
 	border-bottom-width: 1px;
 	border-color: rgba(255, 255, 255, 0.1);
 	border-left-width: 1px;
@@ -89,6 +127,7 @@ body {
 	align-items: flex-start;
 	background-color: rgba(255, 255, 255, 0.05);
 	border-radius: 16px;
+	box-sizing: border-box;
 	display: flex;
 	flex: 0 0 auto;
 	flex-flow: column nowrap;
@@ -96,7 +135,7 @@ body {
 	overflow: hidden;
 	padding: 20px;
 	position: relative;
-	width: 610px;
+	width: 100%;
 	max-width: 1200px;
 	will-change: transform;
 	overflow: auto;
@@ -119,6 +158,7 @@ body {
 	border-right-width: 1px;
 	border-style: solid;
 	border-top-width: 1px;
+	box-sizing: border-box;
 	place-content: flex-start;
 	align-items: flex-start;
 	background-color: rgba(255, 255, 255, 0.05);
@@ -131,7 +171,7 @@ body {
 	overflow: hidden;
 	padding: 20px;
 	position: relative;
-	width: 610px;
+	width: 100%;
 	max-width: 1200px;
 	will-change: transform;
 	overflow: auto;
@@ -165,14 +205,7 @@ textarea {
 
 .prompt-buttons {
 	display: flex;
-	place-content: center;
-	align-items: center;
 	justify-content: flex-end;
-	flex: 0 0 auto;
-	flex-flow: row nowrap;
-	gap: 12px;
-	height: min-content;
-	overflow: hidden;
 	padding: 0px;
 	position: relative;
 	width: 100%;
@@ -316,7 +349,8 @@ textarea {
 	flex-flow: column nowrap;
 	gap: 10px;
 	height: min-content;
-	max-width: 1200px;
+	max-width: 975px;
+	margin-bottom: 80px;
 	overflow: hidden;
 	position: relative;
 	width: 100%;
@@ -336,6 +370,10 @@ textarea {
 	width: 100%;
 }
 
+.output-header {
+	width: 100%;
+}
+
 .output-header h3 {
 	font-family: 'Manrope', serif;
 	font-size: 28px;
@@ -350,10 +388,23 @@ textarea {
 	margin: 0;
 }
 
+.output-header h2 {
+	font-family: 'Manrope', serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 800;
+	letter-spacing: 0px;
+	line-height: 1.4em;
+	text-align: start;
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: none;
+	margin: 0;
+}
+
 .output-content {
 	outline: none;
 	display: flex;
-	/* max-width: 25%; */
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-shrink: 0;
@@ -361,7 +412,9 @@ textarea {
 }
 
 .output-content p {
-	text-align: center;
+	font-size: 20px;
+	width: 100%;
+	text-align: left;
 	white-space: pre-line;
 	color: rgba(255, 255, 255, 0.5);
 }
@@ -380,6 +433,11 @@ textarea {
 	.prompt-box {
 		width: 100%;
 	}
+
+	.output {
+		max-width: 600px;
+		width: 100%;
+	}
 }
 
 @media (max-width: 809px) {
@@ -394,6 +452,11 @@ textarea {
 	}
 
 	.prompt-box {
+		width: 100%;
+	}
+
+	.output {
+		max-width: 500px;
 		width: 100%;
 	}
 }
@@ -427,6 +490,11 @@ textarea {
 	}
 
 	.prompt-box {
+		width: 100%;
+	}
+
+	.output {
+		max-width: 400px;
 		width: 100%;
 	}
 }

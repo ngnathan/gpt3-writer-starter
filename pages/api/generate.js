@@ -1,32 +1,40 @@
 import { Configuration, OpenAIApi } from 'openai';
 
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY
-});
-
-const openai = new OpenAIApi(configuration);
-
 const maxWordsPerPrompt = 2000;
 const maxRequests = 5;
 
 const generateAction = async (req, res) => {
+	console.log('req.body', req.body);
+	const { openAIApiKey, podcastTitle, episodeTitle, transcript } = req.body;
+
+	if (!openAIApiKey || openAIApiKey === '' || !podcastTitle || podcastTitle === '' || !transcript || transcript === '') {
+		console.log('throw error');
+		return res.status(400).json({ error: 'Missing required fields' });
+	}
+
+	const configuration = new Configuration({
+		apiKey: openAIApiKey
+	});
+
+	const openai = new OpenAIApi(configuration);
+
 	const promptChain = [];
 
-	const wordArray = req.body.transcript.trim().split(/\s+/);
+	const wordArray = transcript.trim().split(/\s+/);
 	const wordArrayLength = wordArray.length;
 	if (wordArrayLength > maxWordsPerPrompt) {
 		for (let i = 0; i < wordArrayLength / maxWordsPerPrompt; i++) {
 			const transcriptArray = wordArray.slice(i * maxWordsPerPrompt, (i + 1) * maxWordsPerPrompt - 1);
 			const prompt = `Create a summary based on the podcast transcript.
-      Podcast Title: ${req.body.podcastTitle} - ${req.body.episodeTitle}
+      Podcast Title: ${podcastTitle} - ${episodeTitle}
       Podcast Transcript: ${transcriptArray.join(' ')}
       Summary:`;
 			promptChain.push(prompt);
 		}
 	} else {
 		const basePrompt = `Create a summary based on the podcast transcript.
-    Podcast Title: ${req.body.podcastTitle} - ${req.body.episodeTitle}
-    Podcast Transcript: ${req.body.transcript}
+    Podcast Title: ${podcastTitle} - ${episodeTitle}
+    Podcast Transcript: ${transcript}
     Summary:`;
 		promptChain.push(basePrompt);
 	}
@@ -58,7 +66,7 @@ const generateAction = async (req, res) => {
 	// If chained, request a full summary
 	if (promptOutputs.length > 1) {
 		const prompt = `Create a summary based on the podcast description.
-    Podcast Title: ${req.body.podcastTitle} - ${req.body.episodeTitle}
+    Podcast Title: ${podcastTitle} - ${episodeTitle}
     Podcast Description: ${promptOutputs.map((promptOutput) => `\n${promptOutput.text}`)}
     Summary:`;
 		console.log('prompt', prompt);
